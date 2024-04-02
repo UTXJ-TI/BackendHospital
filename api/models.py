@@ -96,7 +96,7 @@ class seguimiento_pediatria(models.Model):
 	#foundation = models.PositiveIntegerField()
     #TextField(blanck=True)
 	def __str__(self):
-		return self.ro_nombre
+		return self.id_paciente
 
 class solicitud_transplantes(models.Model):
     ID = models.AutoField(primary_key=True)
