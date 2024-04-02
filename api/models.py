@@ -174,7 +174,7 @@ class c_dispensacion_medicamentos(models.Model):
         Parcialmente_Abastecido = 'Parcialmente abastecido'
 
     
-    Estatus = models.CharField(max_length=15, choices=Estado.choices, default=Estado.Abastecido)
+    Estatus = models.CharField(max_length=23, choices=Estado.choices, default=Estado.Abastecido)
 
     def __str__(self):
         return str(self.Receta_ID)
