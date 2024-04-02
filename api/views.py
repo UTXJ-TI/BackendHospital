@@ -1,36 +1,29 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from .models import c_cliente,c_rol,c_registrosM, nacimientosBebes, SeguimientoPediatrico,solicitud_organos_1, Puesto, Horario, Personal, c_cliente,c_rol,c_inventario,c_dispensacion,c_receta_medica,c_receta_medica_detalles,ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG
 from .serializer import c_clienteSerializer,c_rolSerializer,c_registroSerializer,BebeSerializer, BebeCrearSerializer, SeguimientoPediatricoSerializer, SeguimientoPediatricoCrearSerializer ,solicitud_organos_1Serializer,c_inventarioSerializer,c_clienteSerializer,c_dispensacionSerializer,c_receta_medicaSerializer,c_receta_medica_detallesSerializer, ServiciosMedicosSerializer, ServiciosHospitalariosSerializer, AprobacionesServiciosSerializer,BitacoraDGServiciosSerializer, PuestoSerializer, HorarioSerializer, PersonalSerializer
 
 
 # Vista para ver todos los bebés
-class BebeList(generics.ListAPIView):
+
+# ViewSet para el modelo nacimientosBebes
+class BebeViewSet(viewsets.ModelViewSet):
     queryset = nacimientosBebes.objects.all()
     serializer_class = BebeSerializer
 
-# Vista para ver detalles de un bebé
-class BebeDetail(generics.RetrieveAPIView):
-    queryset = nacimientosBebes.objects.all()
-    serializer_class = BebeSerializer
+    def get_serializer_class(self):
+        if self.action == 'create' or self.action == 'update':
+            return BebeCrearSerializer
+        return BebeSerializer
 
-# Vista para crear un bebé
-class BebeCrear(generics.CreateAPIView):
-    serializer_class = BebeCrearSerializer
-
-# Vista para ver todos los seguimientos pediátricos
-class SeguimientoPediatricoList(generics.ListAPIView):
+# ViewSet para el modelo SeguimientoPediatrico
+class SeguimientoPediatricoViewSet(viewsets.ModelViewSet):
     queryset = SeguimientoPediatrico.objects.all()
     serializer_class = SeguimientoPediatricoSerializer
 
-# Vista para ver detalles de un seguimiento pediátrico
-class SeguimientoPediatricoDetail(generics.RetrieveAPIView):
-    queryset = SeguimientoPediatrico.objects.all()
-    serializer_class = SeguimientoPediatricoSerializer
-
-# Vista para crear un seguimiento pediátrico
-class SeguimientoPediatricoCrear(generics.CreateAPIView):
-    serializer_class = SeguimientoPediatricoCrearSerializer
-    
+    def get_serializer_class(self):
+        if self.action == 'create' or self.action == 'update':
+            return SeguimientoPediatricoCrearSerializer
+        return SeguimientoPediatricoSerializer
 
 class c_clienteViewSet(viewsets.ModelViewSet):
 	queryset = c_cliente.objects.all()

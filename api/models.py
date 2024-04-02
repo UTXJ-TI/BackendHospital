@@ -12,11 +12,12 @@ class nacimientosBebes(models.Model):
     telefono_contacto = models.CharField(max_length=20, null=True)
     email_contacto = models.EmailField(null=True)
     observaciones = models.TextField(null=True)
-    tipo_nacimiento = models.CharField(max_length=8, choices=[('normal', 'Normal'), ('cesarea', 'Cesárea')], null=True)
+    tipo_nacimiento = models.CharField(max_length=8, choices=[('normal', 'Normal'), ('cesarea', 'Cesarea')], null=True)
     frecuencia_cardiaca = models.IntegerField(null=True)
     temperatura = models.DecimalField(max_digits=4, decimal_places=2, null=True)
     presion_arterial_sistolica = models.IntegerField(null=True)
     presion_arterial_diastolica = models.IntegerField(null=True)
+    sexo = models.CharField(max_length=15, null=True)
 
     def __str__(self):
         return f"ID: {self.id}, Nombre: {self.nombre_padre} y {self.nombre_madre}"

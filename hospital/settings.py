@@ -100,9 +100,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '1234',
         'PORT': '3306',
-        'NAME': 'hospital',
+        'NAME': 'apiv1',
     }
 }
 
@@ -154,8 +154,10 @@ ACCOUNTS_EMAIL_VERIFICATION = "mandatory"
 ACCOUNTS_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
 ACCOUNTS_LOGOUT_ON_GET =True
 
-CORS_ALLOWED_ORIGINS=[]
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
 }
+
+# permite acceder a la api desde cualquier direccion
+CORS_ALLOW_ALL_ORIGINS = True
