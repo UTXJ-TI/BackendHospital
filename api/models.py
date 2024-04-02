@@ -163,54 +163,72 @@ class c_Solicitud_Cirugias(models.Model):
     def __str__(self):
         return self.d_nombre
 
-class c_receta_medica(models.Model):
-    r_id = models.AutoField(primary_key=True)
-    r_cita_id = models.CharField(max_length=15)
-    r_fecha_hora_registro = models.CharField(max_length=15)
-    r_estatus = models.CharField(max_length=15)
+#FARMACIA
+
+class c_dispensacion_medicamentos(models.Model):
+    # di_ID = models.AutoField(primary_key=True)
+    Personal_Medico_ID = models.CharField(max_length=15)
+    Receta_ID = models.CharField(max_length=15)
+    Fecha_Registro = models.DateTimeField(auto_now_add=True)
+    Total_Medicamentos_Solicitados = models.IntegerField()
+    Total_Medicamentos_Entregados = models.IntegerField()  
+
+    
+    class Estado(models.TextChoices):
+        Abastecido = 'Abastecido'
+        Parcialmente_Abastecido = 'Parcialmente abastecido'
+
+    
+    Estatus = models.CharField(max_length=23, choices=Estado.choices, default=Estado.Abastecido)
+
+    def __str__(self):
+        return str(self.Receta_ID)
+    
+class c_detalle_dispensacion(models.Model):
+    Dispensacion_ID = models.CharField(max_length=15)
+    Detalle_Receta_ID = models.CharField(max_length=15)
+    Fecha_Entrega = models.DateTimeField(auto_now_add=True)  
+    Cantidad_Entregada = models.IntegerField()  
+    Precio_Unitario = models.DecimalField(max_digits=10, decimal_places=2)
+    Precio_Total = models.DecimalField(max_digits=10, decimal_places=2)
     
     def __str__(self):
-        return str(self.r_id)
+        return str(self.Dispensacion_ID)
 
-class c_receta_medica_detalles(models.Model):
-    rc_id = models.AutoField(primary_key=True)
-    rc_recetaId = models.CharField(max_length=15)
-    rc_medicamento = models.CharField(max_length=15)
-    rc_dosis = models.CharField(max_length=15)
-    rc_solicitados = models.CharField(max_length=15)
-    rc_precio = models.CharField(max_length=15)
-    rc_fecha_venta = models.CharField(max_length=15)
+class c_detalle_dispensacion_relacion(models.Model):
+    Dispensacion_ID = models.CharField(max_length=15)
+    Detalle_Dispensacion_ID = models.CharField(max_length=15)
     
-    def __str__(self):
-        return str(self.rc_id)
 
-class c_inventario(models.Model):
-    i_id = models.AutoField(primary_key=True)
-    i_codigo = models.CharField(max_length=15)
-    i_tipo_presentacion = models.CharField(max_length=15)
-    i_via_administracion = models.CharField(max_length=15)
-    i_cantidad = models.CharField(max_length=15)
-    i_precio_costo = models.FloatField(default=0)
-    i_precio_venta = models.FloatField(default=0)
-    i_numero_lote = models.CharField(max_length=15)
-    i_fecha_caducidad = models.CharField(max_length=15)
+    class Estado(models.TextChoices):
+        Validado = 'Validado'
+        No_Validado = 'No Validado'
+
     
-    def __str__(self):
-        return str(self.i_id)
+    Estatus = models.CharField(max_length=15, choices=Estado.choices, default=Estado.Validado)
 
-
-class c_dispensacion(models.Model):
-    di_id = models.AutoField(primary_key=True)
-    di_recetaId = models.CharField(max_length=15)
-    di_medicamento = models.CharField(max_length=15)
-    di_dosis = models.CharField(max_length=15)
-    di_solicitados = models.CharField(max_length=15)
-    di_cantidad = models.CharField(max_length=100)  # Cambiado a CharField con longitud más pequeña
-    di_precio = models.CharField(max_length=15)
-    di_fecha_venta = models.CharField(max_length=15)
-    
+class c_lotes_medicamentos(models.Model):
+    Descripcion = models.CharField(max_length=15)
+    Cantidad = models.IntegerField()  
+    Precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)  
+    Fecha_solicitud = models.DateField() 
+    Fecha_ingreso = models.DateField(auto_now_add=True) 
+   
     def __str__(self):
-        return str(self.di_id)
+        return str(self.Descripcion)
+
+class c_detalle_lotes(models.Model):
+    Lotes_ID = models.CharField(max_length=15)
+    Codigo = models.CharField(max_length=15)
+    Medicamento_ID = models.CharField(max_length=15)
+    fecha_vencimiento = models.DateField() 
+    Marca = models.CharField(max_length=50)  
+    Precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)  
+    Estatus = models.CharField(max_length=15)
+   
+    def __str__(self):
+        return str(self.Lotes_ID)
+
 
 	# Modelos de Direccion General ------------------
 

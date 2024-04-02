@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import c_cliente,c_rol, c_registrosM, solicitud_organos_1,nacimientosBebes, SeguimientoPediatrico, c_dispensacion, c_inventario, c_receta_medica, c_receta_medica_detalles, ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG, Puesto, Horario, Personal 
+from .models import c_cliente,c_rol, c_registrosM, solicitud_organos_1,nacimientos_bebes,seguimiento_pediatria, c_dispensacion_medicamentos,c_detalle_dispensacion,c_detalle_dispensacion_relacion, c_lotes_medicamentos,c_detalle_lotes, ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG, Puesto, Horario, Personal 
 
 # Serializador para ver/obtener información de un bebé
 class BebeSerializer(serializers.ModelSerializer):
@@ -36,25 +37,31 @@ class c_rolSerializer(serializers.ModelSerializer):
         model = c_rol
         fields = '__all__'
   
-class c_dispensacionSerializer(serializers.ModelSerializer):  # Renombrado a c_dispensacionSerializer
+# FARMACIA
+class c_dispensacionSerializer(serializers.ModelSerializer):  
     class Meta:
-        model = c_dispensacion
+        model = c_dispensacion_medicamentos
+        fields = '__all__'
+class c_detalle_dispensacionSerializer(serializers.ModelSerializer):  
+    class Meta:
+        model = c_detalle_dispensacion
         fields = '__all__'
   
-class c_inventarioSerializer(serializers.ModelSerializer):  # Renombrado a c_inventarioSerializer
+class c_detalle_dispensacion_relacionSerializer(serializers.ModelSerializer):  
     class Meta:
-        model = c_inventario
+        model = c_detalle_dispensacion_relacion
         fields = '__all__'
-  
-class c_receta_medicaSerializer(serializers.ModelSerializer):  # Renombrado a c_receta_medicaSerializer
+
+class c_lotesSerializer(serializers.ModelSerializer): 
     class Meta:
-        model = c_receta_medica
+        model = c_lotes_medicamentos
         fields = '__all__'
-  
-class c_receta_medica_detallesSerializer(serializers.ModelSerializer):  # Renombrado a c_receta_medica_detallesSerializer
+        
+class c_detalle_lotesSerializer(serializers.ModelSerializer): 
     class Meta:
-        model = c_receta_medica_detalles
+        model = c_detalle_lotes
         fields = '__all__'
+
 
 
 class Meta:

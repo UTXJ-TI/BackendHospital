@@ -1,6 +1,9 @@
 from rest_framework import viewsets, generics
 from .models import c_cliente,c_rol,c_registrosM, nacimientosBebes, SeguimientoPediatrico,solicitud_organos_1, Puesto, Horario, Personal, c_cliente,c_rol,c_inventario,c_dispensacion,c_receta_medica,c_receta_medica_detalles,ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG
 from .serializer import c_clienteSerializer,c_rolSerializer,c_registroSerializer,BebeSerializer, BebeCrearSerializer, SeguimientoPediatricoSerializer, SeguimientoPediatricoCrearSerializer ,solicitud_organos_1Serializer,c_inventarioSerializer,c_clienteSerializer,c_dispensacionSerializer,c_receta_medicaSerializer,c_receta_medica_detallesSerializer, ServiciosMedicosSerializer, ServiciosHospitalariosSerializer, AprobacionesServiciosSerializer,BitacoraDGServiciosSerializer, PuestoSerializer, HorarioSerializer, PersonalSerializer
+from rest_framework import viewsets
+from .models import c_cliente,c_rol,c_registrosM, nacimientos_bebes,seguimiento_pediatria,solicitud_organos_1, Puesto, Horario, Personal, c_cliente,c_rol, c_dispensacion_medicamentos,c_detalle_dispensacion,c_detalle_dispensacion_relacion, c_lotes_medicamentos,c_detalle_lotes,ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG
+from .serializer import c_clienteSerializer,c_rolSerializer,c_registroSerializer, nacimientos_bebesSerializer,seguimiento_pediatriaSerializer,solicitud_organos_1Serializer,c_clienteSerializer,c_dispensacionSerializer,c_detalle_dispensacionSerializer,c_lotesSerializer,c_detalle_lotesSerializer,c_detalle_dispensacion_relacionSerializer, ServiciosMedicosSerializer, ServiciosHospitalariosSerializer, AprobacionesServiciosSerializer,BitacoraDGServiciosSerializer, PuestoSerializer, HorarioSerializer, PersonalSerializer
 
 
 # Vista para ver todos los bebés
@@ -41,21 +44,29 @@ class solicitud_organos_1ViewSet(viewsets.ModelViewSet):
 	queryset = solicitud_organos_1.objects.all()
 	serializer_class = solicitud_organos_1Serializer
 
-class c_inventarioViewSet(viewsets.ModelViewSet):
-	queryset = c_inventario.objects.all()
-	serializer_class = c_inventarioSerializer
-
+#FARMACIA
 class c_dispensacionViewSet(viewsets.ModelViewSet):
-	queryset = c_dispensacion.objects.all()
+	queryset = c_dispensacion_medicamentos.objects.all()
 	serializer_class = c_dispensacionSerializer
 
-class c_receta_medicaViewSet(viewsets.ModelViewSet):
-	queryset = c_receta_medica.objects.all()
-	serializer_class = c_receta_medicaSerializer
+class c_detalle_dispensacionViewSet(viewsets.ModelViewSet):
+	queryset = c_detalle_dispensacion.objects.all()
+	serializer_class = c_detalle_dispensacionSerializer
 
-class c_receta_medica_detallesViewSet(viewsets.ModelViewSet):
-	queryset = c_receta_medica_detalles.objects.all()
-	serializer_class = c_receta_medica_detallesSerializer
+class c_detalle_dispensacion_relacionViewSet(viewsets.ModelViewSet):
+	queryset = c_detalle_dispensacion_relacion.objects.all()
+	serializer_class = c_detalle_dispensacion_relacionSerializer
+
+
+class c_lotes_medicamentoViewSet(viewsets.ModelViewSet):
+	queryset = c_lotes_medicamentos.objects.all()
+	serializer_class = c_lotesSerializer
+
+class c_detalle_lotes_medicamentoViewSet(viewsets.ModelViewSet):
+	queryset = c_detalle_lotes.objects.all()
+	serializer_class = c_detalle_lotesSerializer
+
+
 
 class ServiciosMedicosViewSet(viewsets.ModelViewSet):
 	queryset = ServiciosMedicos.objects.all()
