@@ -1,0 +1,87 @@
+#Herramientas de arranque de proyecto
+#se instala python si no se tiene instalado o se actuliza
+#python -- version
+
+#se instala el entorno virtual dentro del sistema sino se tiene
+#pipenv --version
+
+#se intala en el proyecto allauth
+#pip install django-allauth
+
+#se corre el entorno virtual
+#pipenv shell
+
+## para el la creacion de la base de datos y el API rest 
+## se instala 
+
+#--------
+#se instala mysql para la base de datos
+pip install mysqlclient
+
+#se instala el siguiente comando para el API
+pip install djangorestframework
+
+## crea la carpeta contenedora de APIs
+django-admin startapp api
+
+#se corre el proyecto
+#python manage.py runserver
+
+-----------------------------------------
+
+** nota:
+    para poder iniciar las migraciones la base de datos debe de 
+    existir en el entorno MySQL, para este proyecto la base de 
+    datos se creo: 
+
+            create database autolavado;
+
+    Al activar las migraciones las tabla que se diseño en models 
+    se exorta y migra a la base de datos 
+
+## para crear las migraciones 
+python manage.py makemigrations
+
+## agrega las migraciones
+python manage.py migrate 
+
+
+Las migraciones incorporan los datos y estructura de la 
+base de datos en Mysql 
+
+----------------------------------------------
+
+##Se crea un super usuario 
+python manage.py createsuperuser
+
+------Credenciales del super usuario dentro del proyecto y acceso a las tablas --------
+(Autolavado-DUPnxnuv) E:\Autolavado>python manage.py createsuperuser
+Nombre de usuario (leave blank to use 'pc-02'): jack32
+Dirección de correo electrónico: jack323256@gmail.com
+Password: jack323256
+
+-- Estas credencuiales permiten accesar desde el entorno de aministrador 
+con la ruta http://127.0.0.1:8000/admin
+
+se ingresa el usuario: jack32
+se ingresa la contraseña: jack323256
+
+-- esto permete el acceso a la adminstracion 
+
+-- se instala cors  
+pip install django-cors-headers
+
+-- se intala para la documentacion de la api
+pip install coreapi
+
+-- instala las herramientas para la contruccion de api
+pip install setuptools
+
+-- genera el archivo de dependencias y requerimientos del proyecto
+python -m pip freeze > requirements.txt
+
+-- para generar los rquerimeinto de instalacion en otro sistema u otra maquina
+pip install -r requirements.txt
+
+--Entrar al api
+http://127.0.0.1:8000/docs/
