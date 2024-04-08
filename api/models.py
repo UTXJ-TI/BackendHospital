@@ -282,6 +282,21 @@ class BitacoraDG(models.Model):
     class Meta:
         verbose_name_plural = 'Bitácora DG'
 
+from django.db import models
+
+class VistaEstadoSolicitudes(models.Model):
+    mes = models.IntegerField(primary_key=True)  
+    num_aprobadas = models.IntegerField()
+    num_en_proceso = models.IntegerField()
+    num_no_aprobadas = models.IntegerField()
+    num_canceladas = models.IntegerField()
+
+    class Meta:
+        managed = False  # Esto le dice a Django que esta tabla no será gestionada por él
+        db_table = 'vista_estado_solicitudes'  # Nombre de la vista en la base de datos hospital_backend       
+
+# -----------------------------------------------------------------------------------
+
 class Puesto(models.Model):
     ID = models.AutoField(primary_key=True)
     # Departamento_ID = models.ForeignKey('Departamento', on_delete=models.CASCADE)
