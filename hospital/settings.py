@@ -154,7 +154,25 @@ ACCOUNTS_EMAIL_VERIFICATION = "mandatory"
 ACCOUNTS_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
 ACCOUNTS_LOGOUT_ON_GET =True
 
-CORS_ALLOWED_ORIGINS=[]
+CORS_ALLOWED_ORIGINS=[
+    'http://localhost:8080',
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE',
+]
+
+CORS_ALLOW_HEADERS = [
+    'Accept',
+    'Accept-Encoding',
+    'Authorization',
+    'Content-Type',
+    'Origin',
+    'User-Agent',
+]
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
