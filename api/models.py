@@ -281,13 +281,12 @@ class BitacoraDG(models.Model):
 
     class Meta:
         verbose_name_plural = 'Bitácora DG'
-
 class Puesto(models.Model):
     ID = models.AutoField(primary_key=True)
     Nombre = models.CharField(max_length=100, null=False)
     Descripcion = models.TextField(blank=True)
     Requisitos = models.TextField(blank=True)
-    Tipo_Contrato = models.CharField(max_length=50)
+    Tipo_Contrato = models.CharField(max_length=50, default='Tiempo Completo')
     Salario_Minimo = models.DecimalField(max_digits=10, decimal_places=2)
     Salario_Maximo = models.DecimalField(max_digits=10, decimal_places=2)
     Estatus = models.CharField(max_length=8, choices=[('activo', 'activo'), ('inactivo', 'inactivo')], default='activo')
@@ -296,8 +295,11 @@ class Puesto(models.Model):
         return self.Nombre
 
 class DepartamentoPuesto(models.Model):
-    Departamento_ID = models.ForeignKey('Departamento', on_delete=models.CASCADE)
-    Puesto_ID = models.ForeignKey('Puesto', on_delete=models.CASCADE)
+    # Departamento_ID = models.ForeignKey('Departamento', on_delete=models.CASCADE)
+    # Puesto_ID = models.ForeignKey('Puesto', on_delete=models.CASCADE)
+    # Eliminamos las llaves foráneas pero conservamos los campos relacionados
+    Departamento_ID = models.CharField(max_length=100)
+    Puesto_ID = models.CharField(max_length=100)
 
     class Meta:
         unique_together = (('Departamento_ID', 'Puesto_ID'),)
@@ -305,21 +307,27 @@ class DepartamentoPuesto(models.Model):
     def __str__(self):
         return f'{self.Departamento_ID} - {self.Puesto_ID}'
 
+
+
 class Personal(models.Model):
     ID = models.AutoField(primary_key=True)
-    Persona_ID = models.ForeignKey('Persona', on_delete=models.CASCADE)
+    Persona_ID = models.CharField(max_length=100, null=True)  # Optional field
     Direccion = models.CharField(max_length=500)
     Telefono = models.CharField(max_length=15)
-    Puesto_ID = models.ForeignKey('Puesto', on_delete=models.CASCADE)
+    Puesto_ID = models.ForeignKey(Puesto, on_delete=models.CASCADE, default=...)  # ForeignKey with default value
     Estatus = models.CharField(max_length=8, choices=[('activo', 'activo'), ('inactivo', 'inactivo')], default='activo')
 
     def __str__(self):
         return f'{self.Persona_ID} - {self.Puesto_ID}'
 
 
+
+
 class HorarioPersonal(models.Model):
     ID = models.AutoField(primary_key=True)
-    Personal_ID = models.ForeignKey('Personal', on_delete=models.CASCADE)
+    # Personal_ID = models.ForeignKey('Personal', on_delete=models.CASCADE)
+    # Eliminamos la llave foránea pero conservamos el campo relacionado
+    Personal_ID = models.CharField(max_length=100, default='default_value_here')
     Fecha_inicio = models.DateField()
     Dias_semana = models.CharField(max_length=50)
     Turno = models.CharField(max_length=8, choices=[('Mañana', 'Mañana'), ('Tarde', 'Tarde'), ('Noche', 'Noche')])
@@ -328,4 +336,3 @@ class HorarioPersonal(models.Model):
 
     def __str__(self):
         return f'{self.Personal_ID} - {self.Fecha_inicio}'
-
