@@ -18,6 +18,7 @@ router.register(r'ServiciosHospitalarios', views.ServiciosHospitalariosViewSet)
 router.register(r'AprobacionesServicios', views.AprobacionesServiciosViewSet)
 router.register(r'BitacoraDG', views.BitacoraDGServiciosViewSet)
 router.register(r'Puesto', views.PuestoViewSet)
+router.register(r'DepartamentoPuesto', views.DepartamentoPuestoViewSet)
 router.register(r'HorarioPersonal', views.HorarioPersonalViewSet)
 router.register(r'Personal', views.PersonalViewSet)
 
