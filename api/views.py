@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from .models import c_cliente,c_rol,c_registrosM, nacimientos_bebes,seguimiento_pediatria,personas, pacientes, personal_medico, organos, solicitud_transplantes, Puesto, Horario, Personal, c_cliente,c_rol,c_inventario,c_dispensacion,c_receta_medica,c_receta_medica_detalles,ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG
+from .models import c_cliente,c_rol,c_registrosM, nacimientos_bebes,seguimiento_pediatria,personas, pacientes, personal_medico, organos, solicitud_transplantes, Puesto, Horario, Personal, c_cliente,c_rol,c_dispensacion_medicamentos,c_receta_medica,c_receta_medica_detalles,ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG
 from .serializer import c_clienteSerializer,c_rolSerializer,c_registroSerializer, nacimientos_bebesSerializer,seguimiento_pediatriaSerializer,personasSerializer, pacientesSerializer, personal_medicoSerializer, organosSerializer, solicitud_transplantesSerializer,c_inventarioSerializer,c_clienteSerializer,c_dispensacionSerializer,c_receta_medicaSerializer,c_receta_medica_detallesSerializer, ServiciosMedicosSerializer, ServiciosHospitalariosSerializer, AprobacionesServiciosSerializer,BitacoraDGServiciosSerializer, PuestoSerializer, HorarioSerializer, PersonalSerializer
 
 class nacimientos_bebesViewSet(viewsets.ModelViewSet):
@@ -42,12 +42,9 @@ class solicitud_transplantesViewSet(viewsets.ModelViewSet):
 	queryset = solicitud_transplantes.objects.all()
 	serializer_class = solicitud_transplantesSerializer
 
-class c_inventarioViewSet(viewsets.ModelViewSet):
-	queryset = c_inventario.objects.all()
-	serializer_class = c_inventarioSerializer
 
 class c_dispensacionViewSet(viewsets.ModelViewSet):
-	queryset = c_dispensacion.objects.all()
+	queryset = c_dispensacion_medicamentos.objects.all()
 	serializer_class = c_dispensacionSerializer
 
 class c_receta_medicaViewSet(viewsets.ModelViewSet):
