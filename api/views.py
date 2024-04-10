@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from .models import c_cliente,c_rol,c_registrosM, nacimientos_bebes,seguimiento_pediatria,solicitud_organos_1, Puesto, Horario, Personal, c_cliente,c_rol,c_inventario,c_dispensacion,c_receta_medica,c_receta_medica_detalles,ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG,VistaEstadoSolicitudes
-from .serializer import c_clienteSerializer,c_rolSerializer,c_registroSerializer, nacimientos_bebesSerializer,seguimiento_pediatriaSerializer,solicitud_organos_1Serializer,c_inventarioSerializer,c_clienteSerializer,c_dispensacionSerializer,c_receta_medicaSerializer,c_receta_medica_detallesSerializer, ServiciosMedicosSerializer, ServiciosHospitalariosSerializer, AprobacionesServiciosSerializer,BitacoraDGServiciosSerializer,VistaEstadoSolicitudesServiciosSerializer, PuestoSerializer, HorarioSerializer, PersonalSerializer
+from .serializer import c_clienteSerializer,c_rolSerializer,c_registroSerializer, nacimientos_bebesSerializer,seguimiento_pediatriaSerializer,solicitud_organos_1Serializer,c_inventarioSerializer,c_clienteSerializer,c_dispensacionSerializer,c_receta_medicaSerializer,c_receta_medica_detallesSerializer, ServiciosMedicosSerializer, ServiciosHospitalariosSerializer, AprobacionesServiciosSerializer,BitacoraDGServiciosSerializer,VistaEstadoSolicitudesSerializer , PuestoSerializer, HorarioSerializer, PersonalSerializer
 
 class nacimientos_bebesViewSet(viewsets.ModelViewSet):
 	queryset = nacimientos_bebes.objects.all()
@@ -58,9 +58,9 @@ class BitacoraDGServiciosViewSet(viewsets.ModelViewSet):
 	queryset = BitacoraDG.objects.all()
 	serializer_class = BitacoraDGServiciosSerializer
 
-class VistaEstadoSolicitudesServiciosViewSet(viewsets.ModelViewSet):
-	queryset = BitacoraDG.objects.all()
-	serializer_class = VistaEstadoSolicitudesServiciosSerializer
+class VistaEstadoSolicitudesViewSet(viewsets.ModelViewSet):
+    queryset = VistaEstadoSolicitudes.objects.all()  # Consulta para recuperar todos los objetos
+    serializer_class = VistaEstadoSolicitudesSerializer  # Utiliza el serializador adecuado
 
 
 class PuestoViewSet(viewsets.ModelViewSet):

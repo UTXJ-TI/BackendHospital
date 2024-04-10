@@ -75,7 +75,7 @@ class BitacoraDGServiciosSerializer(serializers.ModelSerializer):
 		model = BitacoraDG
 		fields = '__all__'
 
-class VistaEstadoSolicitudesServiciosSerializer(serializers.ModelSerializer):
+class VistaEstadoSolicitudesSerializer (serializers.ModelSerializer):
 	class Meta:
 		model = VistaEstadoSolicitudes
 		fields = '__all__'

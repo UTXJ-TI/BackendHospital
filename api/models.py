@@ -258,7 +258,8 @@ class AprobacionesServicios(models.Model):
     estatus = models.CharField(max_length=20, choices=(
         ('Aprobado', 'Aprobado'),
         ('No Aprobado', 'No Aprobado'),
-        ('En Proceso', 'En Proceso')
+        ('En Proceso', 'En Proceso'),
+        ('Cancelado', 'Cancelado')
     ), default='En Proceso')
     comentarios = models.TextField()
     fecha_aprobacion = models.DateTimeField(null=True)
@@ -282,10 +283,9 @@ class BitacoraDG(models.Model):
     class Meta:
         verbose_name_plural = 'Bitácora DG'
 
-from django.db import models
 
 class VistaEstadoSolicitudes(models.Model):
-    mes = models.IntegerField(primary_key=True)  
+    mes = models.IntegerField(primary_key=True)  # Utilizamos el mes como clave primaria
     num_aprobadas = models.IntegerField()
     num_en_proceso = models.IntegerField()
     num_no_aprobadas = models.IntegerField()
@@ -293,7 +293,9 @@ class VistaEstadoSolicitudes(models.Model):
 
     class Meta:
         managed = False  # Esto le dice a Django que esta tabla no será gestionada por él
-        db_table = 'vista_estado_solicitudes'  # Nombre de la vista en la base de datos hospital_backend       
+        db_table = 'vista_estado_solicitudes'      
+
+
 
 # -----------------------------------------------------------------------------------
 
