@@ -103,6 +103,15 @@ DATABASES = {
         'PASSWORD': '1234',
         'PORT': '3306',
         'NAME': 'hospital_backend',
+    },
+
+    'mongodb': {
+        'ENGINE': 'djongo',
+        'NAME': 'bd_hospital_210237',  # Nombre de tu base de datos en MongoDB
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb://localhost:27017/',  # URL de conexión a tu servidor MongoDB
+        }
     }
 }
 

@@ -85,3 +85,30 @@ pip install -r requirements.txt
 
 --Entrar al api
 http://127.0.0.1:8000/docs/
+
+para configurar la base de datos No SQL instala 
+
+pip install djongo
+
+despues de la configuracion SQL coloca en settings
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'localhost',
+        'USER': 'root',
+        'PASSWORD': '1234',
+        'PORT': '3306',
+        'NAME': 'hospital_backend',
+    },
+    'mongodb': {
+        'ENGINE': 'djongo',
+        'NAME': 'mydatabase',  # Nombre de tu base de datos en MongoDB
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb://localhost:27017/',  # URL de conexión a tu servidor MongoDB
+        }
+    }
+}
+
+
