@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from .models import c_cliente,c_rol, c_registrosM, personas, pacientes, personal_medico, organos, solicitud_transplantes, nacimientos_bebes,seguimiento_pediatria, c_dispensacion_medicamentos, c_receta_medica, c_receta_medica_detalles, ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG, Puesto, Horario, Personal 
 from .models import c_cliente,c_rol, c_registrosM, nacimientos_bebes,seguimiento_pediatria, c_receta_medica, c_receta_medica_detalles, ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG,Departamento,AreaMedica,PersonalMedico,Persona, VistaEstadoSolicitudes,VistaCantidadPersonalMedico, VistaCantidadPacientes, VistaOperacionesBitacora, Puesto, Horario, Personal 
 from .models import c_cliente,c_rol, c_registrosM,nacimientos_bebes,seguimiento_pediatria, c_dispensacion_medicamentos,c_detalles_dispensacion, c_lotes_medicamentos,c_detalle_lotes, c_receta_medica, c_receta_medica_detalles, ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG, Puesto, Horario, Personal 
 
@@ -34,6 +35,7 @@ class c_detalles_dispensacionSerializer(serializers.ModelSerializer):  # Renombr
   
 class c_lotesSerializer(serializers.ModelSerializer):  # Renombrado a c_inventarioSerializer
     class Meta:
+       # model = c_inventario
         model = c_lotes_medicamentos
         fields = '__all__'
         
@@ -62,11 +64,35 @@ class c_registroSerializer(serializers.ModelSerializer):
 		model = c_registrosM
 		fields = '__all__'
   
+class personasSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = personas
+		fields = '__all__'
 #class solicitud_organos_1Serializer(serializers.ModelSerializer):
 #	class Meta:
 #		model = solicitud_organos_1
 #		fields = '__all__'
 
+class pacientesSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = pacientes
+		fields = '__all__'
+
+class personal_medicoSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = personal_medico
+		fields = '__all__'
+
+class organosSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = organos
+		fields = '__all__'
+
+class solicitud_transplantesSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = solicitud_transplantes
+		fields = '__all__'
+  
 class ServiciosMedicosSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = ServiciosMedicos
