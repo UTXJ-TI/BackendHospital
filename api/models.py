@@ -302,7 +302,8 @@ class AprobacionesServicios(models.Model):
     estatus = models.CharField(max_length=20, choices=(
         ('Aprobado', 'Aprobado'),
         ('No Aprobado', 'No Aprobado'),
-        ('En Proceso', 'En Proceso')
+        ('En Proceso', 'En Proceso'),
+        ('Cancelado', 'Cancelado')
     ), default='En Proceso')
     comentarios = models.TextField()
     fecha_aprobacion = models.DateTimeField(null=True)
@@ -325,6 +326,152 @@ class BitacoraDG(models.Model):
 
     class Meta:
         verbose_name_plural = 'Bitácora DG'
+
+
+class Departamento(models.Model):
+    nombre = models.CharField(max_length=100)
+    area_medica = models.ForeignKey('AreaMedica', on_delete=models.SET_NULL, null=True, blank=True)
+    departamento_superior = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
+    responsable = models.ForeignKey('PersonalMedico', on_delete=models.SET_NULL, null=True, blank=True, related_name='departamentos_responsable')
+    estatus = models.IntegerField(default=1)
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        db_table = 'departamentos'
+
+
+class AreaMedica(models.Model):
+    nombre = models.CharField(max_length=150)
+    descripcion = models.TextField(null=True, blank=True)
+    estatus = models.BooleanField(default=True)
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        db_table = 'areas_medicas'
+
+
+class Persona(models.Model):
+    TITULO_CHOICES = [
+        ('Sr.', 'Sr.'),
+        ('Sra.', 'Sra.'),
+        ('Srta.', 'Srta.'),
+        ('Dr.', 'Dr.'),
+        ('Dra.', 'Dra.'),
+        ('Lic.', 'Lic.'),
+        ('Ing.', 'Ing.'),
+        ('Prof.', 'Prof.'),
+        ('Otro', 'Otro'),
+    ]
+    GENERO_CHOICES = [
+        ('M', 'Masculino'),
+        ('F', 'Femenino'),
+        ('N/B', 'No binario'),
+    ]
+    GRUPO_SANGUINEO_CHOICES = [
+        ('A', 'A'),
+        ('B', 'B'),
+        ('AB', 'AB'),
+        ('O', 'O'),
+    ]
+    TIPO_SANGUINEO_CHOICES = [
+        ('+', 'Positivo'),
+        ('-', 'Negativo'),
+    ]
+
+    titulo = models.CharField(max_length=45, null=True, blank=True, choices=TITULO_CHOICES)
+    nombre = models.CharField(max_length=80)
+    primer_apellido = models.CharField(max_length=80)
+    segundo_apellido = models.CharField(max_length=80, null=True, blank=True)
+    curp = models.CharField(max_length=20, null=True, blank=True)
+    genero = models.CharField(max_length=3, choices=GENERO_CHOICES)
+    grupo_sanguineo = models.CharField(max_length=2, choices=GRUPO_SANGUINEO_CHOICES)
+    tipo_sanguineo = models.CharField(max_length=1, choices=TIPO_SANGUINEO_CHOICES)
+    fecha_nacimiento = models.DateField()
+    estatus = models.BooleanField(default=True)
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        db_table = 'personas'
+
+
+class PersonalMedico(models.Model):
+    TIPO_CHOICES = [
+        ('Médico', 'Médico'),
+        ('Enfermero', 'Enfermero'),
+        ('Administrativo', 'Administrativo'),
+        ('Directivo', 'Directivo'),
+        ('Apoyo', 'Apoyo'),
+        ('Residente', 'Residente'),
+        ('Interno', 'Interno'),
+    ]
+    ESTADO_CHOICES = [
+        ('Activo', 'Activo'),
+        ('Inactivo', 'Inactivo'),
+        ('Jubilado', 'Jubilado'),
+        ('Permiso', 'Permiso'),
+    ]
+
+    persona = models.OneToOneField(Persona, on_delete=models.CASCADE, primary_key=True)
+    departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE, related_name='personal_medico')
+    especialidad = models.CharField(max_length=50, null=True, blank=True)
+    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
+    cedula_profesional = models.PositiveIntegerField(null=True, blank=True)
+    estatus = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='Activo')
+    fecha_contratacion = models.DateTimeField(auto_now_add=True)
+    fecha_terminacion_contrato = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        db_table = 'personal_medico'
+
+
+# --------------------Vistas de DG---------------------------------------------------------------
+
+class VistaEstadoSolicitudes(models.Model):
+    mes = models.IntegerField(primary_key=True)  # Utilizamos el mes como clave primaria
+    num_aprobadas = models.IntegerField()
+    num_en_proceso = models.IntegerField()
+    num_no_aprobadas = models.IntegerField()
+    num_canceladas = models.IntegerField()
+
+    class Meta:
+        managed = False  # Esto le dice a Django que esta tabla no será gestionada por él
+        db_table = 'vista_estado_solicitudes'      
+
+class VistaCantidadPersonalMedico(models.Model):
+    medicos = models.IntegerField(primary_key=True) 
+    enfermeros = models.IntegerField()
+    administrativos = models.IntegerField()
+    directivos = models.IntegerField()
+    apoyo = models.IntegerField()
+    residentes = models.IntegerField()
+    internos = models.IntegerField()
+
+    class Meta:
+        managed = False  # Indica a Django que no gestione esta tabla (ya que es una vista de MySQL)
+        db_table = 'vista_cantidad_personal_medico'  # Nombre de la vista en la base de datos
+
+class VistaCantidadPacientes(models.Model):
+    cantidad_total_personas = models.IntegerField(primary_key=True) 
+    cantidad_femeninos = models.IntegerField()
+    cantidad_masculinos = models.IntegerField()
+
+    class Meta:
+        managed = False  # Indica a Django que no gestione esta tabla (ya que es una vista de MySQL)
+        db_table = 'vista_pacientes'  # Nombre de la vista en la base de datos
+
+class VistaOperacionesBitacora(models.Model):
+    inserciones = models.IntegerField(primary_key=True) 
+    actualizaciones = models.IntegerField()
+    eliminaciones = models.IntegerField()
+
+    class Meta:
+        managed = False  # Indica a Django que no gestione esta tabla (ya que es una vista de MySQL)
+        db_table = 'vista_operaciones_bitacora'  # Nombre de la vista en la base de datos
+
+# -----------------------------------------------------------------------------------
 
 class Puesto(models.Model):
     ID = models.AutoField(primary_key=True)

@@ -100,9 +100,18 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '1234',
         'PORT': '3306',
-        'NAME': 'hospital',
+        'NAME': 'hospital_backend',
+    },
+
+    'mongodb': {
+        'ENGINE': 'djongo',
+        'NAME': 'bd_hospital_210237',  # Nombre de tu base de datos en MongoDB
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb://localhost:27017/',  # URL de conexión a tu servidor MongoDB
+        }
     }
 }
 
@@ -154,7 +163,25 @@ ACCOUNTS_EMAIL_VERIFICATION = "mandatory"
 ACCOUNTS_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
 ACCOUNTS_LOGOUT_ON_GET =True
 
-CORS_ALLOWED_ORIGINS=[]
+CORS_ALLOWED_ORIGINS=[
+    'http://localhost:8080',
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE',
+]
+
+CORS_ALLOW_HEADERS = [
+    'Accept',
+    'Accept-Encoding',
+    'Authorization',
+    'Content-Type',
+    'Origin',
+    'User-Agent',
+]
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",

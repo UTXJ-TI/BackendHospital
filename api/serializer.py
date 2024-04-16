@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from .models import c_cliente,c_rol, c_registrosM, nacimientos_bebes,seguimiento_pediatria, c_receta_medica, c_receta_medica_detalles, ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG,Departamento,AreaMedica,PersonalMedico,Persona, VistaEstadoSolicitudes,VistaCantidadPersonalMedico, VistaCantidadPacientes, VistaOperacionesBitacora, Puesto, Horario, Personal 
 from .models import c_cliente,c_rol, c_registrosM,nacimientos_bebes,seguimiento_pediatria, c_dispensacion_medicamentos,c_detalles_dispensacion, c_lotes_medicamentos,c_detalle_lotes, c_receta_medica, c_receta_medica_detalles, ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG, Puesto, Horario, Personal 
 
 class nacimientos_bebesSerializer(serializers.ModelSerializer):
@@ -84,6 +85,47 @@ class AprobacionesServiciosSerializer(serializers.ModelSerializer):
 class BitacoraDGServiciosSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = BitacoraDG
+		fields = '__all__'
+
+class DepartamentoServiciosSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Departamento
+		fields = '__all__'
+
+class AreaMedicaServiciosSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = AreaMedica
+		fields = '__all__'
+
+class PersonalMedicoServiciosSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = PersonalMedico
+		fields = '__all__'
+
+class PersonaServiciosSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Persona
+		fields = '__all__'
+
+
+class VistaEstadoSolicitudesSerializer (serializers.ModelSerializer):
+	class Meta:
+		model = VistaEstadoSolicitudes
+		fields = '__all__'
+
+class VistaCantidadPersonalMedicoSerializer (serializers.ModelSerializer):
+	class Meta:
+		model = VistaCantidadPersonalMedico
+		fields = '__all__'
+
+class VistaCantidadPacientesSerializer (serializers.ModelSerializer):
+	class Meta:
+		model = VistaCantidadPacientes
+		fields = '__all__'
+
+class VistaOperacionesBitacoraSerializer (serializers.ModelSerializer):
+	class Meta:
+		model = VistaOperacionesBitacora
 		fields = '__all__'
 
 
