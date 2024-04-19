@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import c_cliente,c_rol,c_registrosM, c_cirugia,c_Solicitud_Cirugias, nacimientos_bebes,seguimiento_pediatria, c_dispensacion,c_receta_medica,c_receta_medica_detalles,c_inventario,ServiciosMedicos, ServiciosHospitalarios, AprobacionesServicios,BitacoraDG,Departamento,AreaMedica,Persona,PersonalMedico, Puesto, Horario, Personal
+from .models import c_cliente,c_rol,c_registrosM, c_cirugia,c_Solicitud_Cirugias, nacimientos_bebes,seguimiento_pediatria, c_dispensacion,c_receta_medica,c_receta_medica_detalles,c_inventario,ServiciosMedicos, ServiciosHospitalarios, AprobacionesServicios,BitacoraDG,Departamentos,AreaMedica,Personas,PersonalMedico, Pacientes, Puesto, Horario, Personal
 
 # Register your models here.
 admin.site.register(nacimientos_bebes)
@@ -17,10 +17,11 @@ admin.site.register(ServiciosMedicos)
 admin.site.register(ServiciosHospitalarios)
 admin.site.register(AprobacionesServicios)
 admin.site.register(BitacoraDG)
-admin.site.register(Departamento)
+admin.site.register(Departamentos)
 admin.site.register(AreaMedica)
-admin.site.register(Persona)
+admin.site.register(Personas)
 admin.site.register(PersonalMedico)
+admin.site.register(Pacientes)
 admin.site.register(Puesto)
 admin.site.register(Horario)
 admin.site.register(Personal)

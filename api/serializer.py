@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import c_cliente,c_rol, c_registrosM, solicitud_organos_1,nacimientos_bebes,seguimiento_pediatria, c_dispensacion, c_inventario, c_receta_medica, c_receta_medica_detalles, ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG,Departamento,AreaMedica,PersonalMedico,Persona, VistaEstadoSolicitudes,VistaCantidadPersonalMedico, VistaCantidadPacientes, VistaOperacionesBitacora, Puesto, Horario, Personal 
+from .models import c_cliente,c_rol, c_registrosM, solicitud_organos_1,nacimientos_bebes,seguimiento_pediatria, c_dispensacion, c_inventario, c_receta_medica, c_receta_medica_detalles, ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG,Departamentos,AreaMedica,PersonalMedico,Personas, Pacientes, VistaEstadoSolicitudes,VistaCantidadPersonalMedico, VistaCantidadPacientes, VistaOperacionesBitacora,  Puesto, Horario, Personal 
+# from mongo_app.models import Coleccion
 
 class nacimientos_bebesSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -77,7 +78,7 @@ class BitacoraDGServiciosSerializer(serializers.ModelSerializer):
 
 class DepartamentoServiciosSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = Departamento
+		model = Departamentos
 		fields = '__all__'
 
 class AreaMedicaServiciosSerializer(serializers.ModelSerializer):
@@ -90,11 +91,16 @@ class PersonalMedicoServiciosSerializer(serializers.ModelSerializer):
 		model = PersonalMedico
 		fields = '__all__'
 
-class PersonaServiciosSerializer(serializers.ModelSerializer):
+class PacientesHGServiciosSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = Persona
+		model = Pacientes
 		fields = '__all__'
 
+
+class PersonaServiciosSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Personas
+		fields = '__all__'
 
 class VistaEstadoSolicitudesSerializer (serializers.ModelSerializer):
 	class Meta:
@@ -115,6 +121,14 @@ class VistaOperacionesBitacoraSerializer (serializers.ModelSerializer):
 	class Meta:
 		model = VistaOperacionesBitacora
 		fields = '__all__'
+
+
+# class ColeccionSerializer (serializers.ModelSerializer):
+# 	class Meta:
+# 		model = Coleccion
+# 		fields = '__all__'
+
+
 
 
 class PuestoSerializer(serializers.ModelSerializer):

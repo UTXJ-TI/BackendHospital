@@ -1,6 +1,8 @@
 from rest_framework import viewsets
-from .models import c_cliente,c_rol,c_registrosM, nacimientos_bebes,seguimiento_pediatria,solicitud_organos_1, Puesto, Horario, Personal, c_cliente,c_rol,c_inventario,c_dispensacion,c_receta_medica,c_receta_medica_detalles,ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG,Departamento,AreaMedica,PersonalMedico,Persona, VistaEstadoSolicitudes,VistaCantidadPersonalMedico,VistaCantidadPacientes, VistaOperacionesBitacora
-from .serializer import c_clienteSerializer,c_rolSerializer,c_registroSerializer, nacimientos_bebesSerializer,seguimiento_pediatriaSerializer,solicitud_organos_1Serializer,c_inventarioSerializer,c_clienteSerializer,c_dispensacionSerializer,c_receta_medicaSerializer,c_receta_medica_detallesSerializer, ServiciosMedicosSerializer, ServiciosHospitalariosSerializer, AprobacionesServiciosSerializer,BitacoraDGServiciosSerializer,DepartamentoServiciosSerializer, AreaMedicaServiciosSerializer,PersonalMedicoServiciosSerializer,PersonaServiciosSerializer, VistaEstadoSolicitudesSerializer ,VistaCantidadPersonalMedicoSerializer,VistaCantidadPacientesSerializer,VistaOperacionesBitacoraSerializer, PuestoSerializer, HorarioSerializer, PersonalSerializer
+from .models import c_cliente,c_rol,c_registrosM, nacimientos_bebes,seguimiento_pediatria,solicitud_organos_1, Puesto, Horario, Personal, c_cliente,c_rol,c_inventario,c_dispensacion,c_receta_medica,c_receta_medica_detalles,ServiciosMedicos,ServiciosHospitalarios,AprobacionesServicios,BitacoraDG,Departamentos,AreaMedica,PersonalMedico,Personas, Pacientes, VistaEstadoSolicitudes,VistaCantidadPersonalMedico,VistaCantidadPacientes, VistaOperacionesBitacora
+from .serializer import c_clienteSerializer,c_rolSerializer,c_registroSerializer, nacimientos_bebesSerializer,seguimiento_pediatriaSerializer,solicitud_organos_1Serializer,c_inventarioSerializer,c_clienteSerializer,c_dispensacionSerializer,c_receta_medicaSerializer,c_receta_medica_detallesSerializer, ServiciosMedicosSerializer, ServiciosHospitalariosSerializer, AprobacionesServiciosSerializer,BitacoraDGServiciosSerializer,DepartamentoServiciosSerializer, AreaMedicaServiciosSerializer,PersonalMedicoServiciosSerializer,PersonaServiciosSerializer,PacientesHGServiciosSerializer, VistaEstadoSolicitudesSerializer ,VistaCantidadPersonalMedicoSerializer,VistaCantidadPacientesSerializer,VistaOperacionesBitacoraSerializer, PuestoSerializer, HorarioSerializer, PersonalSerializer
+# from mongo_app.models import Coleccion
+
 
 class nacimientos_bebesViewSet(viewsets.ModelViewSet):
 	queryset = nacimientos_bebes.objects.all()
@@ -59,7 +61,7 @@ class BitacoraDGServiciosViewSet(viewsets.ModelViewSet):
 	serializer_class = BitacoraDGServiciosSerializer
 
 class DepartamentoServiciosViewSet(viewsets.ModelViewSet):
-	queryset = Departamento.objects.all()
+	queryset = Departamentos.objects.all()
 	serializer_class = DepartamentoServiciosSerializer
 
 class AreaMedicaServiciosViewSet(viewsets.ModelViewSet):
@@ -70,8 +72,12 @@ class PersonalMedicoServiciosViewSet(viewsets.ModelViewSet):
 	queryset = PersonalMedico.objects.all()
 	serializer_class = PersonalMedicoServiciosSerializer
 
+class PacientesHGServiciosViewSet(viewsets.ModelViewSet):
+	queryset = Pacientes.objects.all()
+	serializer_class = PacientesHGServiciosSerializer
+
 class PersonaServiciosViewSet(viewsets.ModelViewSet):
-	queryset = Persona.objects.all()
+	queryset = Personas.objects.all()
 	serializer_class = PersonaServiciosSerializer
 
 class VistaEstadoSolicitudesViewSet(viewsets.ModelViewSet):
@@ -89,6 +95,11 @@ class VistaCantidadPacientesViewSet(viewsets.ModelViewSet):
 class VistaOperacionesBitacoraViewSet(viewsets.ModelViewSet):
     queryset = VistaOperacionesBitacora.objects.all()  # Consulta para recuperar todos los objetos
     serializer_class = VistaOperacionesBitacoraSerializer  # Utiliza el serializador adecuado
+
+# class ColeccionViewSet(viewsets.ModelViewSet):
+#     queryset = Coleccion.objects.all()  # Consulta para recuperar todos los objetos
+#     serializer_class = ColeccionSerializer  # Utiliza el serializador adecuado
+
 
 
 class PuestoViewSet(viewsets.ModelViewSet):

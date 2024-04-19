@@ -50,7 +50,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'coreapi',
+    'mongo_app',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -102,16 +105,17 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': '1234',
         'PORT': '3306',
-        'NAME': 'hospital_backend',
+        # 'NAME': 'hospital_backend',
+        'NAME': 'Direccion_General_Hospital_210237',
     },
 
-    'mongodb': {
+    'default_mongodb': {
         'ENGINE': 'djongo',
-        'NAME': 'bd_hospital_210237',  # Nombre de tu base de datos en MongoDB
-        'ENFORCE_SCHEMA': False,
         'CLIENT': {
-            'host': 'mongodb://localhost:27017/',  # URL de conexión a tu servidor MongoDB
-        }
+            'host': 'localhost',  # URL de conexión a tu servidor MongoDB
+            'port': 27017,
+        },
+        'NAME': 'DireccionGeneral',  # Nombre de tu base de datos en MongoDB
     }
 }
 
@@ -163,8 +167,11 @@ ACCOUNTS_EMAIL_VERIFICATION = "mandatory"
 ACCOUNTS_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
 ACCOUNTS_LOGOUT_ON_GET =True
 
+
+
 CORS_ALLOWED_ORIGINS=[
     'http://localhost:8080',
+    'http://localhost:27017'
 ]
 
 CORS_ALLOW_METHODS = [
