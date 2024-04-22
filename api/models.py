@@ -281,7 +281,7 @@ class AreaMedica(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'areasmedicas'
+        db_table = 'areas_medicas'
 
 
 class BitacoraDG(models.Model):
