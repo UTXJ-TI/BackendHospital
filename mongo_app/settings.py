@@ -46,10 +46,11 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'api',
+    'mongo_app',
+    # 'api',
     'rest_framework',
     'corsheaders',
-    'coreapi'
+    'coreapi',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -67,7 +68,7 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
 ]
 
-ROOT_URLCONF = 'hospital.urls'
+ROOT_URLCONF = 'mongo_app.urls'
 
 TEMPLATES = [
     {
@@ -85,8 +86,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'hospital.wsgi.application'
-
+WSGI_APPLICATION = 'mongo_app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -99,13 +99,12 @@ WSGI_APPLICATION = 'hospital.wsgi.application'
 #}
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': '1234',
-        'PORT': '3306',
-        # 'NAME': 'hospital_backend',
-        'NAME': 'Direccion_General_Hospital_210237',
+        'ENGINE': 'djongo',
+        'CLIENT': {
+            'host': 'localhost',  # URL de conexión a tu servidor MongoDB
+            'port': 27017,
+        },
+        'NAME': 'DireGeneral',  # Nombre de tu base de datos en MongoDB
     }
 }
 

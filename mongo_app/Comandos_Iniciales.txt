@@ -1,0 +1,12 @@
+
+-- es importante abrir otra terminal, esto evitara tener conflictos con el arranque de Hospital
+
+para arrancar el api de mongo inicializa 
+
+ python manage.py runserver 127.0.0.1:8001 --settings=mongo_app.settings
+
+para migrar
+python manage.py makemigrations --settings=mongo_app.settings
+
+python manage.py migrate --settings=mongo_app.settings       
+

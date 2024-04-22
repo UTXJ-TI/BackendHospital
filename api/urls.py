@@ -2,6 +2,7 @@ from django.urls import path,include
 from rest_framework import routers
 from api import views
 
+
 router = routers.DefaultRouter()
 router.register(r'nacimientos_bebes', views.nacimientos_bebesViewSet)
 router.register(r'seguimiento_pediatria', views.seguimiento_pediatriaViewSet)
@@ -30,6 +31,7 @@ router.register(r'vista_operaciones_bitacora', views.VistaOperacionesBitacoraVie
 router.register(r'Puesto', views.PuestoViewSet)
 router.register(r'Horario', views.HorarioViewSet)
 router.register(r'Personal', views.PersonalViewSet)
+
 
 urlpatterns = [
 	path('api/v1',include(router.urls))

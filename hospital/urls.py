@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('hospital/', include('api.urls')),
-    path('docs/', include_docs_urls(title="hospital API'S")),
+    path('mongo_app/', include('api.urls')),
+    path('docs/', include_docs_urls(title="hospital MySQL API'S")),
 ]
